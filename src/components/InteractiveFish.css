@@ -1,0 +1,17 @@
+/* src/components/InteractiveFish.css */
+
+.fish-wrapper {
+  position: fixed; /* Fixes the fish to the viewport */
+  top: 0;
+  left: 0;
+ 
+  z-index: 9999; /* Ensures it's on top of all other content */
+  pointer-events: none; /* Allows you to click through the fish */
+}
+
+.hero-fish {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 5px 15px rgba(0, 234, 255, 0.4));
+  transition: filter 0.3s ease;
+}

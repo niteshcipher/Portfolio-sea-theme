@@ -1,0 +1,712 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+
+/* --- Base & Theming --- */
+:root {
+  --primary-color: #00eaff; /* Aqua Blue */
+  --secondary-color: #ff9fb2; /* Coral Pink */
+  --background-color: #001b2e; /* Deep Ocean Blue */
+  --text-color: #e0faff;
+  --text-muted-color: #7ec8e3;
+  --card-background: rgba(0, 40, 60, 0.6);
+  --border-color: rgba(0, 234, 255, 0.25);
+  --font-family: 'Space Grotesk', sans-serif;
+}
+
+
+
+
+body {
+  background: radial-gradient(circle at 50% 20%, #00334d, #001b2e 70%);
+  background-attachment: fixed;
+  color: var(--text-color);
+  font-family: var(--font-family);
+  margin: 0;
+  overflow-x: hidden;
+}
+
+
+
+/* --- General Layout --- */ 
+.app-container::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("/background.jpg") center/cover no-repeat;
+  opacity: 0.3;
+  z-index: -3;
+}
+.star-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2; /* Keep it behind the seawater effect */
+  pointer-events: none; /* Make it non-interactive */
+}
+.section { padding: 120px 5%; text-align: center; }
+
+.section-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 50px;
+  color: var(--primary-color);
+  text-shadow: 0 0 20px rgba(0, 234, 255, 0.4);
+}
+/* --- Navigation --- */
+.navigation {
+  position: fixed;
+  top: 20px;
+  left: 9%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 80px; /* <-- define navbar height */
+  padding: 0 5%; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(30, 67, 149, 0.235);
+  border-radius: 50px; /* Gives the curve */
+  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(4, 45, 84, 0.25);
+  box-shadow: 0 0 25px rgba(12, 68, 119, 0.25);
+  z-index: 1000;
+}
+
+
+.navigation.scrolled {
+  background: rgba(30, 67, 149, 0.235);
+  border-color: rgba(91, 127, 224, 0.4);
+  box-shadow: 0 0 35px rgba(12, 68, 119, 0.25);
+  transform: translateX(-50%) scale(0.98);
+}
+
+.nav-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgb(83, 215, 255);
+  text-shadow: #00eaff;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden; /* important to hide the sliding icon */
+  position: relative;
+  transition: text-shadow 0.3s ease;
+}
+
+/* Icon style */
+.nav-logo img.nav-icon {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* When hovered, slide icon down smoothly */
+.nav-logo:hover img.nav-icon {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+/* Optional glow on name when icon slides down */
+.nav-logo:hover {
+  color: var(--primary-color);
+  text-shadow: 0 0 10px var(--primary-color);
+}
+
+.navigation ul {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+  margin: 0;
+  position: relative;
+}
+
+.navigation li {
+  position: relative;
+}
+
+.navigation a {
+  color: var(--text-muted-color);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s, text-shadow 0.3s;
+  position: relative;
+}
+
+.navigation a:hover {
+  color: white;
+  text-shadow: 0 0 10px var(--primary-color);
+}
+
+.navigation a.active {
+  color: var(--primary-color);
+  text-shadow: 0 0 12px var(--primary-color);
+}
+
+.nav-active-glow {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--primary-color);
+  border-radius: 2px;
+  filter: drop-shadow(0 0 10px var(--primary-color));
+  pointer-events: none;
+}
+
+
+
+
+/* --- Hamburger for Mobile --- */
+
+
+.hamburger {
+  display: none; /* Hidden on desktop */
+  flex-direction: column;
+  justify-content: space-around;
+  width: 2rem;
+  height: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+}
+
+.hamburger span {
+  width: 2rem;
+  height: 0.25rem;
+  background: var(--text-color);
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+/* --- Mobile Styles --- */
+@media (max-width: 768px) {
+  /* This is the default style that HIDES the menu off-screen */
+  .navigation ul {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 40vh;
+    width: 40%; /* Or whatever width you prefer */
+    background: rgba(15, 23, 42, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out, visibility 0.3s;
+    /* This panel should be on top of page content */
+    visibility: hidden;
+    z-index: 10; 
+  }
+
+  /* When the ul has the 'open' class, slide it into view */
+  .navigation ul.open {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  /* Make sure the hamburger is visible and on top of EVERYTHING */
+  .hamburger {
+    display: flex;
+    /* ✨ Give the button a higher z-index than the menu panel */
+    z-index: 11;
+  }
+}
+
+
+
+/* --- NEW HERO SECTION STYLES --- */
+/* --- HERO SECTION STYLES --- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Align content to the left */
+  padding: 0 10%; /* Add some horizontal padding */
+  position: relative;
+  overflow: hidden; /* To contain the gradient pseudo-element */
+}
+
+/* ADD THE FOLLOWING NEW STYLES AT THE END OF THE HERO SECTION STYLES */
+
+
+
+/* Make sure the fish disappears on small screens */
+@media (max-width: 900px) {
+  .fish-container {
+    display: none;
+  }
+}
+
+/* Add the purple gradient overlay */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -30%;
+    width: 80%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(147, 51, 234, 0.25) 0%, rgba(147, 51, 234, 0) 60%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-content {
+    max-width: 800px; /* Set a max-width for the content */
+    text-align: left;
+    z-index: 1; /* Ensure content is above the gradient */
+}
+
+.hero-greeting {
+    font-size: 1.6rem;
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--text-muted-color);
+    margin-bottom: 8px;
+}
+
+.hero-name {
+    font-size: 5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+    color: white; /* Make the period white */
+}
+
+.hero-name span {
+    color: var(--accent-purple); /* Style only the name */
+}
+
+.hero-headline {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 10px 0 20px 0;
+    line-height: 1.2;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    color: var(--text-muted-color);
+    line-height: 1.7;
+    margin-bottom: 35px;
+    max-width: 600px; /* Keep the description line length readable */
+    color: #d4eced;
+}
+
+.hero-cta-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.hero-button {
+    background: linear-gradient(90deg, #4583af, #4a78bc);
+    color: white;
+    border: 1px solid rgba(54, 183, 172, 0.2);
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hero-button:hover {
+    box-shadow: 0 0 20px rgba(85, 80, 58, 0.631);
+    transform: translateY(-2px);
+}
+
+.hero-icon {
+    width: 45px;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hero-icon:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* --- Responsive Design for Hero Section --- */
+@media (max-width: 900px) {
+  .hero {
+    text-align: center;
+    justify-content: center; /* Center content on smaller screens */
+    padding: 0 5%;
+  }
+  .hero-content {
+    text-align: center;
+  }
+  .hero-cta-container {
+    justify-content: center;
+  }
+   .hero-name { font-size: 3.5rem; }
+   .hero-headline { font-size: 2.2rem; }
+}
+
+@media (max-width: 768px) {
+    /* (This media query is already in your file, just make sure the hero styles above are not inside it unless needed) */
+    .hero-name { font-size: 3rem; }
+    .hero-headline { font-size: 2rem; }
+}
+/* --- Skills Section --- */
+.skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; width: 100%; max-width: 1200px; margin: 0 auto; }
+.skill-category { background: var(--card-background); border: 1px solid var(--border-color); padding: 30px; border-radius: 15px; text-align: left; transition: all 0.3s ease; }
+.skill-category h3 { font-size: 1.5rem; margin-top: 0; margin-bottom: 20px; color: white; display: flex; align-items: center; gap: 10px; }
+.skill-category ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-category li { background-color: rgba(40, 88, 136, 0.1); border-radius: 20px; padding: 8px 15px; font-size: 0.9rem; }
+/* --- Upgraded Toolkit Section --- */
+.skill-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.skill-header h3 {
+  font-size: 1.4rem;
+  color: white;
+}
+
+.skill-logos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 25px;
+  justify-items: center;
+  align-items: center;
+}
+
+.skill-item {
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.skill-item img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 8px rgb(255, 255, 255));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.skill-item:hover img {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 12px rgba(147, 51, 234, 0.6));
+}
+
+.skill-item p {
+  color: var(--text-muted-color);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skill-logos {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 20px;
+  }
+  .skill-item img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+.projects-section {
+  padding: 5rem 2rem;
+  background: #03061700;
+  color: #fff;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #00d4ff;
+  margin-bottom: 4rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* --- Container for All Projects --- */
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* --- Project Card --- */
+.project-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  background: rgba(8, 18, 40, 0.6);
+  border: 1px solid rgba(0, 214, 255, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.05);
+  transition: all 0.4s ease;
+  width: 100%;
+  max-width: 900px;
+  margin: 1.5rem auto;
+  flex-wrap: wrap;
+}
+
+.project-item:hover {
+  box-shadow: 0 0 40px rgba(0, 200, 255, 0.15);
+  transform: translateY(-5px);
+}
+
+.project-item.reverse {
+  flex-direction: row-reverse;
+}
+
+/* --- Project Text --- */
+.project-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.project-number {
+  color: #00b7ff;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.project-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.project-desc {
+  color: #cfd6e3;
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.tech-tag {
+  background: rgba(0, 214, 255, 0.15);
+  color: #00d4ff;
+  border: 1px solid rgba(0, 214, 255, 0.3);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.project-links a {
+  display: inline-block;
+  margin-right: 1.5rem;
+  color: #00d4ff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.project-links a:hover {
+  color: #7af0ff;
+}
+
+/* --- Image Section --- */
+.project-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.project-image-border {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #00d4ff;
+  border-radius: 16px;
+  top: 12px;
+  left: 12px;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.project-image-container:hover .project-image-border {
+  top: 6px;
+  left: 6px;
+  opacity: 1;
+}
+
+/* --- Image Itself --- */
+.project-image {
+  width: 420px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 16px;
+  z-index: 2;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 200, 255, 0.25);
+  transition: transform 0.4s ease;
+}
+
+.project-image:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 1100px) {
+  .project-image,
+  .project-image-container::before {
+    width: 360px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 900px) {
+  .project-item,
+  .project-item.reverse {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .project-text {
+    padding: 0;
+  }
+
+  .project-image-container {
+    margin-top: 1.8rem;
+  }
+
+  .project-image,
+  .project-image-container::before {
+    width: 90%;
+    height: auto;
+  }
+}
+
+
+/* --- Experience Section --- */
+.experience-container { max-width: 800px; margin: 0 auto; display: grid; gap: 20px; }
+.experience-item { background: var(--card-background); border-left: 3px solid var(--border-color); padding: 20px; text-align: left; transition: border-color 0.3s ease; }
+.experience-item h4 { margin: 0 0 10px; font-size: 1.2rem; color: white; }
+.experience-item p { margin: 0; color: var(--text-muted-color); line-height: 1.6; }
+
+/* --- Contact Section --- */
+#contact p { max-width: 600px; margin: 0 auto 30px; color: var(--text-muted-color); }
+.contact-buttons { margin-bottom: 30px; }
+.contact-main-button { background: var(--primary-color); color: white; text-decoration: none; padding: 15px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 700; transition: all 0.3s ease; }
+.social-links { display: flex; justify-content: center; gap: 30px; }
+.social-links a { color: var(--text-muted-color); text-decoration: none; font-size: 2rem; transition: color 0.3s; }
+.social-links a:hover { color: white; }
+
+/* --- Footer --- */
+.footer { text-align: center; padding: 40px; color: var(--text-muted-color); font-size: 0.9rem; border-top: 1px solid var(--border-color); }
+
+/* --- Responsive Design --- */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .hero-text-content { text-align: center; order: 2; }
+  .hero-image-container { order: 1; margin-bottom: 40px; }
+  .hero-title { font-size: 3.5rem; }
+}
+
+
+/* --- About Section --- */
+.about-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: left;
+  
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(48, 86, 200, 0.3);
+  transition: transform 0.4s ease;
+  background-color: #1a415f8f;
+}
+
+.about-image img:hover {
+  transform: scale(1.05);
+}
+
+.about-text p {
+  color: var(--text-muted-color);
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+/* --- Responsive (for mobile/tablet) --- */
+@media (max-width: 900px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .about-image img {
+    margin-bottom: 30px;
+    
+    
+  }
+}
+/* app.css */
+/* app.css */
+
+
+
+/* You can remove or adjust this media query if the effect covers the whole screen now */
+@media (max-width: 768px) {
+}
+
