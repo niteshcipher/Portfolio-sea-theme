@@ -118,7 +118,7 @@ const projectsData = [
     tagline: "One-click SOS alerts to verified users nearby.",
     description:
       "A women safety app that instantly alerts all verified users nearby during emergencies. With real-time location tracking, SOS broadcasting, and volunteer coordination, HerShield ensures quick help when it matters most.",
-    image: "public/hershield.png",
+    image: "/hershield.png",
     tech: ["React Native", "Socket.io", "Leaflet", "Node.js"],
     links: { github: "https://github.com/niteshcipher/HerShield", live: "#" },
   },
@@ -127,7 +127,7 @@ const projectsData = [
     tagline: "Track goals with gamified progress and AI suggestions.",
     description:
       "Questify transforms personal growth into an adventure. It generates smart roadmaps, tracks your progress, and gamifies your journey with points, badges, and AI-based learning suggestions.",
-    image: "/public/questify.png",
+    image: "/questify.png",
     tech: ["React", "Node.js", "Express", "MongoDB", "AI"],
     links: { github: "https://github.com/niteshcipher/techberg", live: "https://frostpro-1.onrender.com/" },
   },
@@ -136,7 +136,7 @@ const projectsData = [
     tagline: "Your personal voice-controlled AI assistant.",
     description:
       "AerisAI automates your digital life. It opens apps, writes emails, answers questions, and performs system tasks—all through natural voice commands and smart context understanding.",
-    image: "/public/aerisai.png",
+    image: "/aerisai.png",
     tech: ["Python", "Electron","Hugging Face ","Speech Recognition", "OpenAI API"],
     links: { github: "https://github.com/niteshcipher/Aeris-Ai" },
   },
@@ -145,7 +145,7 @@ const projectsData = [
     tagline: "Full-stack eCommerce website with secure payments.",
     description:
       "Iztend is a MERN-based full-stack eCommerce platform offering product browsing, cart management, and Stripe-powered payment gateway for a smooth shopping experience.",
-    image: "/public/iztend.png",
+    image: "/iztend.png",
     tech: ["React", "Node.js", "MongoDB", "Stripe API"],
     links: { github: "https://github.com/RajanPatel0/E-Comm", live: "#" },
   },
@@ -154,7 +154,7 @@ const projectsData = [
     tagline: "A minimal 3D cube runner built with Three.js.",
     description:
       "Pixel Prism is a fun and minimalistic cube runner game using Three.js and WebGL, showcasing creative 3D rendering and web animation techniques.",
-    image: "/public/pixelprism.png",
+    image: "/pixelprism.png",
     tech: ["Three.js", "JavaScript", "WebGL"],
     links: { github: "https://github.com/niteshcipher/pixel-prism", live: "https://pixel-prism.onrender.com" },
   },
