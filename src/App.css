@@ -381,6 +381,7 @@ body {
   }
   .hero-content {
     text-align: center;
+    
   }
   .hero-cta-container {
     justify-content: center;
@@ -716,3 +717,14 @@ body {
 @media (max-width: 768px) {
 }
 
+/* --- Fix Hero Overlapping Navbar --- */
+.hero {
+  padding-top: 120px; /* Equal or slightly more than your navbar height (80px + 20px top margin) */
+}
+
+/* Adjust for smaller screens */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 100px; /* Slightly less padding on small screens */
+  }
+}
