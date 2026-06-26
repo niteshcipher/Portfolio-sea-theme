@@ -285,7 +285,7 @@ const projectsData = [
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
             >
-                Your Go-To MERN Stack Enthusiast
+                Software Engineer | Transforming Complex Logic into High Impact Software
             </motion.h2>
             <motion.p
                 className="hero-description"
@@ -293,7 +293,7 @@ const projectsData = [
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
             >
-                I'm a passionate MERN Stack Developer and 3rd year CSE student, dedicated to building user-friendly web applications and solving real-world problems through technology. I thrive on innovation, continuous learning, and creating meaningful digital experiences.
+                I'm a passionate MERN Stack Developer and 4th year CSE student, dedicated to building user friendly applications and solving real-world problems through technology. I thrive on innovation, continuous learning, and creating meaningful digital experiences.
             </motion.p>
             <motion.div
                 className="hero-cta-container"
